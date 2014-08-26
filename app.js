@@ -10,9 +10,9 @@ var sqlite3 = require('sqlite3').verbose();
 var exphbs  = require('express-handlebars');
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var posts = require('./routes/posts');
 
 var app = express();
-
 
 
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
@@ -26,10 +26,11 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('/public',path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/posts', posts);
 
 
 

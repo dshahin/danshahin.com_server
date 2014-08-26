@@ -1,22 +1,16 @@
 var express = require('express');
 var router = express.Router();
 var sqlite3 = require('sqlite3').verbose();
-
 var db = new sqlite3.Database('bloggy');
 
 /* GET users listing. */
 router.get('/', function(req, res) {
-  res.send('respond with a resource');
-});
-
-router.get('/foo', function(req, res) {
-	db.serialize(function() {
+  	db.serialize(function() {
 	    var sql = "SELECT rowid AS id, info FROM lorem";
 	    db.all(sql, function(err, rows) {
 	      res.send(JSON.stringify(rows));
 	    });
 	});
-
 });
 
 module.exports = router;
